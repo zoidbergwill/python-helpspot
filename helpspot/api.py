@@ -113,6 +113,11 @@ class HelpSpotAPI:
         Calls the remote HelpSpot method on the HelpSpot server.
         """
         uri = '%s%s' % (self.uri, self.method)
+	
+	for key in kwargs:
+	    if isinstance(kwargs[key], unicode):
+		kwargs[key] = kwargs[key].encode('iso-8859-1')
+
         params = urlencode(kwargs)
         if 'GET' == self.action:
             if params:
